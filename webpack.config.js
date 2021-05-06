@@ -8,11 +8,12 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js",
   },
+  mode: process.env.NODE_ENV || "development",
   devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
-    port: 9000,
+    port: 8000,
     watchContentBase: true,
     progress: true
   },
@@ -29,6 +30,10 @@ module.exports = {
             test: /.(css|scss)$/,
             use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
           },
+          { 
+            test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+            use: ["file-loader"] 
+        },
     ],
 },
 plugins: [
