@@ -68,6 +68,11 @@ textarea {
     display: flex;
     flex-direction: column;
     width: 40%;
+    opacity:0;
+    transition: 0.3; /*Скорость перехода состояния элемента*/
+    animation: show 1s 1; /* Указываем название анимации, её время и количество повторов*/
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+
 }
 .author {
     // display: inline-block;
@@ -80,6 +85,21 @@ textarea {
     color: #2DA430;
 }
 .bot {
+    opacity:0;
     align-self: flex-start;
     background: #FFFFFF;
+    transition: 0.3; /*Скорость перехода состояния элемента*/
+    animation: show 1s 1; /* Указываем название анимации, её время и количество повторов*/
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+    animation-delay: 0.8s; /* Задержка перед началом */
 }
+
+@keyframes show{
+    0%{
+    opacity:0;
+    }
+    100% {
+    opacity:1;
+    }
+    }
+ 

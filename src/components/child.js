@@ -1,8 +1,6 @@
-import _ from 'lodash';
-import React, {useEffect } from 'react';
+import React from 'react';
 import Message from './message'
 import Bot from './bot'
-
 
 const BOT_ANS = [
     "Я буду рад с тобой поболтать",
@@ -18,61 +16,52 @@ const BOT_ANS = [
     "А если Дуров спалит",
     "Тебе одиноко"
 ]
-let  currentMessage, currentAuthor;
-const  botMessegrs = [];
 
  class App extends React.Component {
 
     state = {
         messages: [],
+        currentMessage: "",
+        currentAuthor: ""
     };
-    componentDidMount() {
-        this.isButtonActive();
-    }
     componentDidUpdate() {
         if(this.state.messages.length % 2 === 1) {
             console.log('fddfgj');
             this.setState({ 
                 messages: [ ...this.state.messages, BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)] ],
-            }, this.isButtonActive);
-        }
-    }
-    isButtonActive = () => {
-        if (!currentMessage || !currentAuthor) {
-            document.querySelector('button').setAttribute('disabled', 'disabled')           
-        } else {
-            document.querySelector('button').removeAttribute('disabled')  
+            });
         }
     }
     handleClick = () => {
           
         this.setState({ 
-            messages: [ ...this.state.messages, currentMessage ],
+            messages: [ ...this.state.messages, this.state.currentMessage ],
+            currentMessage: ""
         }, this.botAnswer);
-        currentMessage = "";
-        document.querySelector('textarea').value = "";
     };
-    handleInput = () => {
-        currentAuthor = document.querySelector('input').value;
-        this.isButtonActive();
+    handleInput = (event) => {
+        this.setState({currentAuthor: event.target.value})
     }
-    handleMes = () => {
-        currentMessage = document.querySelector('textarea').value;
-        this.isButtonActive();
+    handleMes = (event) => {
+        this.setState({currentMessage: event.target.value})
     }
     render() {
-            const messageElements = this.state.messages.map(function (text, index) {
+            const messageElements =  this.state.messages.map( (text, index) => {
                 if (index % 2 === 1) {
-                    return <Bot key={ index } text={ text } author={currentAuthor}/>
+                    return <Bot key={ index } text={ text } author={this.state.currentAuthor}/>
                 }
-                return <Message key={ index } text={ text } author={currentAuthor}/>
+                return <Message key={ index } text={ text } author={this.state.currentAuthor}/>
             });
             return <div className="container flex">
                 <div className="mes-wrp">{ messageElements }</div>
-                <input type="nape" placeholder="your name" onInput={ this.handleInput } className="input"/>
-                <textarea className="textAr" readonly placeholder="your news..." onInput={ this.handleMes }>
+                <input type="nape" value={this.state.currentAuthor} placeholder="your name" onInput={ this.handleInput } className="input"/>
+                <textarea className="textAr" value={this.state.currentMessage} readonly placeholder="your news..." onInput={ this.handleMes }>
                 </textarea>
-                <button onClick={ this.handleClick } className="btn">Отправить</button>
+                <button onClick={ this.handleClick } 
+                        disabled={!this.state.currentMessage || !this.state.currentAuthor} 
+                        className="btn">
+                    Отправить
+                </button>
             </div>  
     }
  }
