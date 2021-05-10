@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './message'
+import Form from './Form'
 import Bot from './bot'
 
 const BOT_ANS = [
@@ -16,13 +17,14 @@ const BOT_ANS = [
     "А если Дуров спалит",
     "Тебе одиноко"
 ]
-
+const AUTHORS = {
+    human: "User",
+    bot: "Magic Man"
+}
  class App extends React.Component {
 
     state = {
         messages: [],
-        currentMessage: "",
-        currentAuthor: ""
     };
     componentDidUpdate() {
         if(this.state.messages.length % 2 === 1) {
@@ -32,36 +34,25 @@ const BOT_ANS = [
             });
         }
     }
-    handleClick = () => {
-          
+    handleClick = (newMes) => {
         this.setState({ 
-            messages: [ ...this.state.messages, this.state.currentMessage ],
-            currentMessage: ""
+            messages: [ ...this.state.messages, newMes ],
         }, this.botAnswer);
     };
-    handleInput = (event) => {
-        this.setState({currentAuthor: event.target.value})
-    }
-    handleMes = (event) => {
-        this.setState({currentMessage: event.target.value})
-    }
+
     render() {
             const messageElements =  this.state.messages.map( (text, index) => {
                 if (index % 2 === 1) {
-                    return <Bot key={ index } text={ text } author={this.state.currentAuthor}/>
+                    return <Bot key={ index } 
+                        text={ text } 
+                        sendler={AUTHORS.human} 
+                        author={AUTHORS.bot}/>
                 }
-                return <Message key={ index } text={ text } author={this.state.currentAuthor}/>
+                return <Message key={ index } text={ text } author={AUTHORS.human}/>
             });
             return <div className="container flex">
                 <div className="mes-wrp">{ messageElements }</div>
-                <input type="nape" value={this.state.currentAuthor} placeholder="your name" onInput={ this.handleInput } className="input"/>
-                <textarea className="textAr" value={this.state.currentMessage} readonly placeholder="your news..." onInput={ this.handleMes }>
-                </textarea>
-                <button onClick={ this.handleClick } 
-                        disabled={!this.state.currentMessage || !this.state.currentAuthor} 
-                        className="btn">
-                    Отправить
-                </button>
+                <Form onAddMes={this.handleClick}/>
             </div>  
     }
  }
