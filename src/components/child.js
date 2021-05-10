@@ -2,6 +2,7 @@ import React from 'react';
 import Message from './message'
 import Form from './Form'
 import Bot from './bot'
+import ChatList from './ChatList'
 
 const BOT_ANS = [
     "Я буду рад с тобой поболтать",
@@ -50,10 +51,13 @@ const AUTHORS = {
                 }
                 return <Message key={ index } text={ text } author={AUTHORS.human}/>
             });
-            return <div className="container flex">
-                <div className="mes-wrp">{ messageElements }</div>
-                <Form onAddMes={this.handleClick}/>
-            </div>  
+            return <div className="wrp-list">
+                    <ChatList/>
+                    <div className="main flex">
+                        <div className="mes-wrp">{ messageElements }</div>
+                        <Form onAddMes={this.handleClick}/>
+                    </div>  
+                </div>
     }
  }
 ;

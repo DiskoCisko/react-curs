@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
 
 class Form extends  React.Component {
 
@@ -20,18 +20,20 @@ class Form extends  React.Component {
     }
 
     render() {
-        return <form onSubmit={this.nandleSubmit} className="container flex">
+        return <form onSubmit={this.nandleSubmit} className=" flex">
         <textarea className="textAr" 
             onKeyUp={ this.handleKeyUp }  
             value={this.state.currentMessage} 
             readonly placeholder="your news..." 
             onInput={ this.handleMes }>
         </textarea>
-        <button type="submit"
+        <Button type="submit"
             disabled={!this.state.currentMessage} 
-            className="btn">
+            className="btn"
+            variant="contained" 
+            color="primary">
             Отправить
-        </button>
+        </Button>
     </form>
     }
 }

@@ -1,6 +1,7 @@
 body {
     background-image: url(assets/Rectangle.jpg);
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 textarea {
     resize: none;
@@ -93,7 +94,20 @@ textarea {
     animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
     animation-delay: 0.8s; /* Задержка перед началом */
 }
-
+.wrp-list {
+    display: flex;
+    justify-content: flex-end;
+}
+.main {
+    width: 70%;
+    text-align: right;
+    padding-right: 50px;
+}
+.makeStyles-root-1 {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+}
 @keyframes show{
     0%{
     opacity:0;
