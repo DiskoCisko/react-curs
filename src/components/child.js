@@ -30,8 +30,7 @@ const AUTHORS = {
         menuShow: false
     };
     componentDidUpdate() {
-        if(this.state.messages.length % 2 === 1) {
-            console.log('fddfgj');
+        if(this.state.messages[this.state.messages.length-1].author === AUTHORS.human) {
             this.setState({ 
                 messages: [ ...this.state.messages, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot} ],
             });
