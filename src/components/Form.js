@@ -7,7 +7,7 @@ class Form extends  React.Component {
         currentMessage: "",
         currentAuthor: ""
     };
-    nandleSubmit = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.onAddMes(this.state.currentMessage)
         this.setState({currentMessage: ""})
@@ -20,9 +20,8 @@ class Form extends  React.Component {
     }
 
     render() {
-        return <form onSubmit={this.nandleSubmit} className=" flex">
-        <textarea className="textAr" 
-            onKeyUp={ this.handleKeyUp }  
+        return <form onSubmit={this.handleSubmit} className=" flex">
+        <textarea className="textAr"   
             value={this.state.currentMessage} 
             readonly placeholder="your news..." 
             onInput={ this.handleMes }>

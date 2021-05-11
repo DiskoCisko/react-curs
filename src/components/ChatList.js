@@ -2,11 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,18 +14,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const CHAT_LIST = [
+    "What",
+    "Is",
+    "Love?",
+    "Baby",
+    "Don't",
+    "Hart me",
+    "No more"
+]
+
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export default function SimpleList() {
+export default function SimpleList(props) {
   const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
+  return ( <> 
+    {props.menuShow && <div className={classes.root}>
+    
       <Divider />
       <List component="nav" aria-label="secondary mailbox folders">
-        <ListItem button>
+      {CHAT_LIST.map((item, index) => {
+          return (<ListItemLink button key={index}>
+          <ListItemText primary={item} item={item} />
+        </ListItemLink>)
+        
+      })}
+        {/* <ListItem button>
           <ListItemText primary="What" />
         </ListItem>
         <ListItemLink href="#simple-list">
@@ -50,8 +64,8 @@ export default function SimpleList() {
         </ListItemLink>
         <ListItemLink href="#simple-list">
           <ListItemText primary="No more" />
-        </ListItemLink>
+        </ListItemLink> */}
       </List>
-    </div>
+    </div>} </>
   );
 }

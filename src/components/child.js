@@ -3,6 +3,7 @@ import Message from './message'
 import Form from './Form'
 import Bot from './bot'
 import ChatList from './ChatList'
+import Header from './Header'
 
 const BOT_ANS = [
     "Я буду рад с тобой поболтать",
@@ -26,38 +27,45 @@ const AUTHORS = {
 
     state = {
         messages: [],
+        menuShow: false
     };
     componentDidUpdate() {
         if(this.state.messages.length % 2 === 1) {
             console.log('fddfgj');
             this.setState({ 
-                messages: [ ...this.state.messages, BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)] ],
+                messages: [ ...this.state.messages, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot} ],
             });
         }
     }
+    isMenuShow = () => {
+        this.setState({menuShow: !this.state.menuShow})
+    }
     handleClick = (newMes) => {
         this.setState({ 
-            messages: [ ...this.state.messages, newMes ],
+            messages: [ ...this.state.messages, {text: newMes, author: AUTHORS.human} ],
         }, this.botAnswer);
     };
 
     render() {
-            const messageElements =  this.state.messages.map( (text, index) => {
-                if (index % 2 === 1) {
+            const messageElements =  this.state.messages.map( (mes, index) => {
+                if (mes.author === AUTHORS.bot) {
                     return <Bot key={ index } 
-                        text={ text } 
+                        text={ mes.text } 
                         sendler={AUTHORS.human} 
-                        author={AUTHORS.bot}/>
+                        author={mes.author}/>
                 }
-                return <Message key={ index } text={ text } author={AUTHORS.human}/>
+                return <Message key={ index } text={ mes.text } author={mes.author}/>
             });
-            return <div className="wrp-list">
-                    <ChatList/>
+            return <>
+                <Header isMenuShow={this.isMenuShow}/>
+                <div className="wrp-list">
+                    <ChatList menuShow={this.state.menuShow}/>
                     <div className="main flex">
                         <div className="mes-wrp">{ messageElements }</div>
                         <Form onAddMes={this.handleClick}/>
                     </div>  
                 </div>
+                </>
     }
  }
 ;
