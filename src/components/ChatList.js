@@ -1,10 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,15 +12,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CHAT_LIST = [
-    "What",
-    "Is",
-    "Love?",
-    "Baby",
-    "Don't",
-    "Hart me",
-    "No more"
+    {
+        name: 'Chat 1',
+        id: 'chat1'
+      },
+      {
+        name: 'Chat 2',
+        id: 'chat2'
+      },
+      {
+        name: 'Chat 3',
+        id: 'chat3'
+      }
 ]
 
+  
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
@@ -31,41 +34,11 @@ function ListItemLink(props) {
 export default function SimpleList(props) {
   const classes = useStyles();
   return ( <> 
-    {props.menuShow && <div className={classes.root}>
-    
-      <Divider />
-      <List component="nav" aria-label="secondary mailbox folders">
-      {CHAT_LIST.map((item, index) => {
-          return (<ListItemLink button key={index}>
-          <ListItemText primary={item} item={item} />
+      {CHAT_LIST.map((item) => {
+          return (<ListItemLink button key={item.id}>
+            <Link className="link black" to={`/chats${item.id}`}>{item.name}</Link>
         </ListItemLink>)
-        
       })}
-        {/* <ListItem button>
-          <ListItemText primary="What" />
-        </ListItem>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Is" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Love?" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Baby" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Don't" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Hurt" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Me" />
-        </ListItemLink>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="No more" />
-        </ListItemLink> */}
-      </List>
-    </div>} </>
+ </>
   );
 }

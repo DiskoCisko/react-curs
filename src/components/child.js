@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useParams} from 'react';
 import Message from './message'
 import Form from './Form'
 import Bot from './bot'
 import ChatList from './ChatList'
-import Header from './Header'
 
 const BOT_ANS = [
     "Я буду рад с тобой поболтать",
@@ -26,9 +25,21 @@ const AUTHORS = {
  class App extends React.Component {
 
     state = {
-        messages: [],
-        menuShow: false
+    //     messages: {
+    //         chat1: [{ author: AUTHORS.HUMAN, text: "Hello" }],
+    //         chat2: [
+    //         { author: AUTHORS.BOT, text: "hi" },
+    //         { author: AUTHORS.BOT, text: "hi again" },
+    //         ]
+    // },
+    messages: []
     };
+    // params = useParams();
+    // chatId  = params;
+    // console.log(params);
+    componentDidMount() {
+        console.log(this.props)
+    }
     componentDidUpdate() {
         if(this.state.messages[this.state.messages.length-1].author === AUTHORS.human) {
             this.setState({ 
@@ -36,16 +47,20 @@ const AUTHORS = {
             });
         }
     }
-    isMenuShow = () => {
-        this.setState({menuShow: !this.state.menuShow})
-    }
+
+    // handleClick = (newMes) => {
+    //     this.setState((prevState) => ({ 
+    //          ...prevState, 
+    //         [chatId]: [...prevState[chatId], {text: newMes, author: AUTHORS.human}] ,
+    //     }));
+    // };
     handleClick = (newMes) => {
         this.setState({ 
-            messages: [ ...this.state.messages, {text: newMes, author: AUTHORS.human} ],
-        }, this.botAnswer);
+            messages: [...this.state.messages, {text: newMes, author: AUTHORS.human}]
+        });
     };
-
     render() {
+        
             const messageElements =  this.state.messages.map( (mes, index) => {
                 if (mes.author === AUTHORS.bot) {
                     return <Bot key={ index } 
@@ -56,9 +71,9 @@ const AUTHORS = {
                 return <Message key={ index } text={ mes.text } author={mes.author}/>
             });
             return <>
-                <Header isMenuShow={this.isMenuShow}/>
                 <div className="wrp-list">
-                    <ChatList menuShow={this.state.menuShow}/>
+                
+                    <ChatList />
                     <div className="main flex">
                         <div className="mes-wrp">{ messageElements }</div>
                         <Form onAddMes={this.handleClick}/>

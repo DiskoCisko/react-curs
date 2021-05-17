@@ -114,6 +114,13 @@ textarea {
   position: fixed;
   left: 0; }
 
+.link {
+  text-decoration: none;
+  color: #fff; }
+
+.black {
+  color: #252525; }
+
 @keyframes show {
   0% {
     opacity: 0; }
