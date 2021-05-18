@@ -21,7 +21,7 @@ export default function SimpleList(props) {
     
       <Divider />
       <List component="nav" aria-label="secondary mailbox folders">
-       <ChatList />
+       <ChatList chatList={props.chatList}/>
       </List>
     </div>} </>
   );
