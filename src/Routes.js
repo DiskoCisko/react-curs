@@ -9,26 +9,27 @@ import {
 } from "react-router-dom";
 
 import ChatList from './components/ChatList';
+
 import App from './components/child';
-import Header from './components/Header'
+import Header from './components/Header';
+import LeftMenu from './components/LeftMenu';
 export const Routes = () => {
-    const [state, setState] = useState({menuShow: false})
+    const [menuShow, setMenuShow] = useState(false)
 
     const isMenuShow = () => {
-        setState({menuShow: !state.menuShow})
+      setMenuShow(!menuShow)
     }   
     return (
       <BrowserRouter>
       <Header isMenuShow={isMenuShow}/>
-
+      <LeftMenu menuShow={menuShow}/>
   
         <Switch>
           <Route path="/" exact>
-            <ChatList menuShow={state.menuShow}/>
+            <ChatList menuShow={menuShow}/>
           </Route>
-          <Route path="/App" exact>
-            <App chatId={ 1 }/>
-          </Route>
+          <Route path="/:id" children={<App />} exact/>
+            
           {/* <Route path="/chats/:chatId">
             <App />
           </Route> */}

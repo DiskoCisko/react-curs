@@ -14,9 +14,10 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 8000,
-    watchContentBase: true,
-    historyApiFallback: true,
-    progress: true
+    historyApiFallback: {
+      index: 'index.html'
+  }
+
   },
   module: {
     rules: [
