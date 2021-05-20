@@ -23,25 +23,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar(props) {
   const classes = useStyles();
-  const handlClick = () => {
-      props.isMenuShow()
-  }
+  // const handlClick = () => {
+  //     props.isMenuShow()
+  // }
 
-  const handleClick = () => {
-    props.updateChatList();
-    CHAT_LIST.push({
-      name: `Chat ${chatList.length + 1}`,
-      id: chatList.length + 1
-    })
-  }
+  // const handleClick = () => {
+  //   props.updateChatList();
+  // }
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={handlClick} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={props.isMenuShow} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Button color="inherit" onClick={handleClick}>
+          <Button color="inherit" onClick={props.updateChatList}>
             Add chat
           </Button>
         </Toolbar>

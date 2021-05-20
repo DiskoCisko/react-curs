@@ -12,9 +12,9 @@ class Form extends  React.Component {
         this.props.onAddMes(this.state.currentMessage)
         this.setState({currentMessage: ""})
     }
-    handleInput = (event) => {
-        this.setState({currentAuthor: event.target.value})
-    }
+    // handleInput = (event) => {
+    //     this.setState({currentAuthor: event.target.value})
+    // }
     handleMes = (event) => {
         this.setState({currentMessage: event.target.value})
     }
