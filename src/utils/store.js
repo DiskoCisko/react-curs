@@ -1,14 +1,5 @@
 import { createStore } from 'redux';
-import initReducers from './../Reducers';
+import initReducers from './../Reducer/index';
 
 
-function initStore() {
-   const innitialStore = {};
-
-   return createStore(
-       initReducers,
-       innitialStore,
-   );
-}
-
-export default initStore;
+export default createStore(initReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

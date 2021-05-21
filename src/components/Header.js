@@ -5,8 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import CHAT_LIST from './chats_store';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,23 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar(props) {
+function ButtonAppBar(props) {
   const classes = useStyles();
-  // const handlClick = () => {
-  //     props.isMenuShow()
-  // }
 
-  // const handleClick = () => {
-  //   props.updateChatList();
-  // }
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={props.isMenuShow} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton 
+            onClick={props.isMenuShow} 
+            edge="start" className={classes.menuButton} 
+            color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Button color="inherit" onClick={props.updateChatList}>
+          <Button color="inherit" onClick={props.addChat}>
             Add chat
           </Button>
         </Toolbar>
@@ -45,3 +40,4 @@ export default function ButtonAppBar(props) {
     </div>
   );
 }
+export default ButtonAppBar;

@@ -7,12 +7,12 @@ import {
   Redirect,
 
 } from "react-router-dom";
-import { Provider } from 'react-redux';
-
-import initStore from './utils/store';
+import { connect } from "react-redux";
+import {addChat} from './actions/actions';
+import {addMes} from './actions/actions';
+import {upMes} from './actions/actions';
 import CHAT_LIST from './components/chats_store';
 import ChatList from './components/ChatList';
-
 
 import App from './components/child';
 import Header from './components/Header';
@@ -26,56 +26,36 @@ let objStr;
           objStr = {...objStr,[CHAT_LIST[i].id]: []}
         }
 
-export const Routes = () => {
+const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
 
     const [menuShow, setMenuShow] = useState(false)
-    const [chatList, setChatlist] = useState(CHAT_LIST);
-    const [messages, setMesseges] = useState(objStr);
     const [idChat, setIdChat] = useState('');
 
    
     useEffect(() => {
-      if(!messages.hasOwnProperty(chatList[chatList.length - 1].id)) {
-        setMesseges({
-          ...messages,
-          [chatList[chatList.length - 1].id]: []
-      })
+      if(!messeges.hasOwnProperty(chats[chats.length - 1].id)) {
+        upMes(chats[chats.length - 1].id)
       }
-    }, [chatList]);
+    }, [chats]);
 
     useEffect(() => {
-      if (Object.keys(messages).length === 0) {
+      if (Object.keys(messeges).length === 0) {
         return
-    } else  if (messages.hasOwnProperty(idChat)) {
-      if(messages[idChat].length !== 0) {
-        if (messages[idChat][messages[idChat].length - 1].author === AUTHORS.human) {
-          setMesseges({
-            ...messages, 
-            [idChat]: [ ...messages[idChat], {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot}]
-          })
+    } else  if (messeges.hasOwnProperty(idChat)) {
+      if(messeges[idChat].length !== 0) {
+        if (messeges[idChat][messeges[idChat].length - 1].author === AUTHORS.human) {
+          addMes(idChat, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot})
         }}
     }
-    }, [messages]);
+    }, [messeges]);
 
     const updateIdChat = (id) => {
       setIdChat(id);
     } 
 
-    const updateChatList = () => {
-      setChatlist([
-        ...chatList,
-        {
-          name: `Chat ${chatList.length + 1}`,
-          id: chatList.length + 1
-        }
-      ])
-    }
 
     const addMessege = (newMes) => {
-      setMesseges({
-        ...messages,
-        [idChat]: [...messages[idChat], {text: newMes, author: AUTHORS.human}]
-      })
+      addMes(idChat, {text: newMes, author: AUTHORS.human});
     }
 
     const isMenuShow = () => {
@@ -84,29 +64,35 @@ export const Routes = () => {
     return (
       
       <BrowserRouter>
-      <Header isMenuShow={isMenuShow} 
-              updateChatList={updateChatList}/>
+      <Header 
+        isMenuShow={isMenuShow}
+        addChat={addChat} 
+             />
       <LeftMenu menuShow={menuShow}
-                chatList={chatList}
+                
       />
         <Switch>
           <Route path="/" exact>
             <ChatList menuShow={menuShow}
-                      chatList={chatList}/>
+                      />
           </Route>
           <Route path="/:id" exact>
-          {/* {<Redirect to="/" />} */}
         <App 
-        chatList = {chatList}
+        
         updateIdChat = {updateIdChat}
         idChat = {idChat}
-        messages = {messages}
+        messages = {messeges}
         addMessege = {addMessege}
          />
-          {(idChat !== ''&&idChat > chatList.length) && <Redirect to="/" />}
+          {(idChat !== ''&&idChat > chats.length) && <Redirect to="/" />}
           </Route>
         </Switch>
       </BrowserRouter>
 
     );
   };
+  const mapStateToProps = state => {
+    return state
+  }
+  
+  export default connect(mapStateToProps, { addMes, upMes, addChat })(Routes);
