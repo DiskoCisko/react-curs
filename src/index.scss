@@ -25,6 +25,9 @@ textarea {
      display: flex;
      flex-direction: column;
  }
+//  .mes-wrp {
+//     flex-direction: column-reverse;
+// }
  .input {
     background: rgba(118, 118, 128, 0.12);
     border-radius: 10px;
@@ -108,12 +111,15 @@ textarea {
     position: fixed;
     left: 0;
 }
-.link {
+a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(37, 37, 37);
 }
 .black {
     color: rgb(37, 37, 37);
+}
+.active {
+    color: red;
 }
 @keyframes show{
     0%{

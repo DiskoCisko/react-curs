@@ -13,7 +13,7 @@ function SimpleList({chats}) {
       {chats.map((item) => {
         const linkUrl = "/" + String(item.id);
           return (<ListItemLink button key={item.id}>
-            <Link className="link black" to={linkUrl}>{item.name}</Link>
+            <Link className={item.active} to={linkUrl}>{item.name}</Link>
         </ListItemLink>)
       })}
  </>

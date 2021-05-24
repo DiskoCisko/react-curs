@@ -38,16 +38,16 @@ const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
       }
     }, [chats]);
 
-    useEffect(() => {
-      if (Object.keys(messeges).length === 0) {
-        return
-    } else  if (messeges.hasOwnProperty(idChat)) {
-      if(messeges[idChat].length !== 0) {
-        if (messeges[idChat][messeges[idChat].length - 1].author === AUTHORS.human) {
-          addMes(idChat, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot})
-        }}
-    }
-    }, [messeges]);
+    // useEffect(() => {
+    //   if (Object.keys(messeges).length === 0) {
+    //     return
+    // } else  if (messeges.hasOwnProperty(idChat)) {
+    //   if(messeges[idChat].length !== 0) {
+    //     if (messeges[idChat][messeges[idChat].length - 1].author === AUTHORS.human) {
+    //       addMes(idChat, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot})
+    //     }}
+    // }
+    // }, [messeges]);
 
     const updateIdChat = (id) => {
       setIdChat(id);
