@@ -1,9 +1,10 @@
-import {ADD_CHAT, UP_CHAT} from './../actions/actionTypes';
+import {ADD_CHAT, UP_CHAT, DEL_CHAT} from './../actions/actionTypes';
 import CHAT_LIST from './../components/chats_store';
+
 
 const initialState = CHAT_LIST;
 
-export default function ( state = initialState, action) {
+export default function ( state = CHAT_LIST, action) {
     switch (action.type) {
         case ADD_CHAT: {
             return [
@@ -30,6 +31,11 @@ export default function ( state = initialState, action) {
                     active: ''
                 };
             })
+            return newState
+        }
+        case DEL_CHAT: {
+            const newState = [...state];
+            newState.splice(action.index, 1)
             return newState
         }
         default:

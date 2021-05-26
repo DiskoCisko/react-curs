@@ -121,6 +121,20 @@ a {
 .active {
     color: red;
 }
+.header-btn {
+    color: #fff;
+    cursor: pointer;
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+.btn-del {
+    margin-left: 20px;
+    color: red;
+    background: rgb(255, 230, 230);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 @keyframes show{
     0%{
     opacity:0;

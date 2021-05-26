@@ -8,9 +8,13 @@ import {
 
 } from "react-router-dom";
 import { connect } from "react-redux";
+
+
 import {addChat} from './actions/actions';
-import {addMes} from './actions/actions';
+import {addMesWithThunk} from './actions/actions';
 import {upMes} from './actions/actions';
+
+
 import CHAT_LIST from './components/chats_store';
 import ChatList from './components/ChatList';
 
@@ -18,7 +22,7 @@ import App from './components/child';
 import Header from './components/Header';
 import LeftMenu from './components/LeftMenu';
 
-import BOT_ANS from './components/bot_ans';
+import Art from './components/Art';
 import AUTHORS from './components/authors';
 
 let objStr;
@@ -26,11 +30,10 @@ let objStr;
           objStr = {...objStr,[CHAT_LIST[i].id]: []}
         }
 
-const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
+const Routes = ({chats, messeges, addMesWithThunk, upMes, addChat}) => {
 
     const [menuShow, setMenuShow] = useState(false)
     const [idChat, setIdChat] = useState('');
-
    
     useEffect(() => {
       if(!messeges.hasOwnProperty(chats[chats.length - 1].id)) {
@@ -38,28 +41,19 @@ const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
       }
     }, [chats]);
 
-    // useEffect(() => {
-    //   if (Object.keys(messeges).length === 0) {
-    //     return
-    // } else  if (messeges.hasOwnProperty(idChat)) {
-    //   if(messeges[idChat].length !== 0) {
-    //     if (messeges[idChat][messeges[idChat].length - 1].author === AUTHORS.human) {
-    //       addMes(idChat, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot})
-    //     }}
-    // }
-    // }, [messeges]);
-
     const updateIdChat = (id) => {
       setIdChat(id);
     } 
 
 
     const addMessege = (newMes) => {
-      addMes(idChat, {text: newMes, author: AUTHORS.human});
+      addMesWithThunk(idChat, {text: newMes, author: AUTHORS.human});
     }
 
     const isMenuShow = () => {
       setMenuShow(!menuShow)
+      
+      
     } 
     return (
       
@@ -76,11 +70,15 @@ const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
             <ChatList menuShow={menuShow}
                       />
           </Route>
+          <Route path="/Art" exact>
+            <Art/>
+          </Route>
           <Route path="/:id" exact>
         <App 
         
         updateIdChat = {updateIdChat}
         idChat = {idChat}
+        chats = {chats}
         messages = {messeges}
         addMessege = {addMessege}
          />
@@ -95,4 +93,4 @@ const Routes = ({chats, messeges, addMes, upMes, addChat}) => {
     return state
   }
   
-  export default connect(mapStateToProps, { addMes, upMes, addChat })(Routes);
+  export default connect(mapStateToProps, { addMesWithThunk, upMes, addChat })(Routes);

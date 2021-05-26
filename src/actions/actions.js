@@ -1,4 +1,7 @@
-import {ADD_CHAT, ADD_MES, UP_MES, UP_CHAT} from './actionTypes';
+import {ADD_CHAT, ADD_MES, UP_MES, UP_CHAT, ART_LOAD, ART_SUCS, ART_FAIL, DEL_CHAT} from './actionTypes';
+import BOT_ANS from './../components/bot_ans';
+import AUTHORS from './../components/authors';
+import {URL} from './../utils/constance';
 
 export const addChat = () => ({
     type: ADD_CHAT
@@ -25,3 +28,47 @@ export const upChat = (id) => ({
         id
     }
 })
+
+export const articleLoading = () => ({
+    type: ART_LOAD
+})
+
+export const articleSucs = (article) => ({
+    type: ART_SUCS,
+    article
+})
+
+export const articleFail = (error) => ({
+    type: ART_FAIL,
+    error
+})
+
+export const getArticle = () => (dispatch) => {
+    dispatch(articleLoading())
+    fetch(URL)
+        .then((response) => {
+            if(!response.ok) {
+                throw new Error('--------' + response.status)  
+            } return response.json()
+        })
+        .then(resp => dispatch(articleSucs(resp)))
+        .catch((err) => {
+            articleFail(dispatch(err.message))
+        });
+}
+
+export const delChat = (index) => ({
+    type: DEL_CHAT,
+    index
+})
+
+export const addMesWithThunk = (id, messege) => (dispatch) => {
+    dispatch(addMes(id, messege));
+
+    if(messege.author === "User") {
+        setTimeout(()=> {
+            dispatch(addMes(id, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot}))
+            dispatch(upChat(id))
+        }, 0)
+    }
+}

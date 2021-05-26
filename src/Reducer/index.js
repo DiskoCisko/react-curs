@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 import chats from './chats';
 import messeges from './messeges';
+import art from './art';
 
 export default combineReducers({
-    chats,
-    messeges});
+    messeges: messeges,
+    chats: chats,
+    art: art
+    });
