@@ -8,6 +8,7 @@ export default store => next => (action) => {
        case ADD_MES: {
         const content = action.payloid;
         if (content.messege.author === "User") {
+            console.log(store)
             setTimeout(()=> {
                 store.dispatch(addMes(content.id, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot}))
                 store.dispatch(upChat(content.id))

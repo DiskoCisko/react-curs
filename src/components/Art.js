@@ -7,10 +7,6 @@ const Art = () => {
 const articles = useSelector(state => state.art.articlList);
 const articleStatus = useSelector(state => state.art.request.status);
 const articleError = useSelector(state => state.art.request.error);
-const dispatch = useDispatch();
-useEffect(() => {
-    dispatch(getArticle());
-        }, []);
 const catFact = articles.map((item, index) => {
     return <>
         <h3 >Fact #{index}</h3>

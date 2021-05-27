@@ -23,7 +23,7 @@ class Form extends  React.Component {
         return <form onSubmit={this.handleSubmit} className=" flex">
         <textarea className="textAr"   
             value={this.state.currentMessage} 
-            readonly placeholder="your news..." 
+            placeholder="your news..." 
             onInput={ this.handleMes }>
         </textarea>
         <Button type="submit"

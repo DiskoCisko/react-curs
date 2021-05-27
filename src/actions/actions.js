@@ -62,12 +62,11 @@ export const delChat = (index) => ({
     index
 })
 
-export const addMesWithThunk = (id, messege) => (dispatch) => {
+export const addMesWithThunk = (id, messege) => (dispatch, getState) => {
     dispatch(addMes(id, messege));
-
     if(messege.author === "User") {
         setTimeout(()=> {
-            dispatch(addMes(id, {text: BOT_ANS[Math.floor(Math.random() * BOT_ANS.length)], author: AUTHORS.bot}))
+            dispatch(addMes(id, {text: getState().art.articlList[Math.floor(Math.random() * getState().art.articlList.length)].text, author: AUTHORS.bot}))
             dispatch(upChat(id))
         }, 0)
     }
