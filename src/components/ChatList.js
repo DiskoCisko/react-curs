@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
  import {delChat} from './../actions/actions';
   
 function ListItemLink(props) {
@@ -12,22 +12,23 @@ function ListItemLink(props) {
 function SimpleList({chats}) {
   const dispatch = useDispatch();
 
-  return ( <> 
+  return ( 
+    <> 
       {chats.map((item, index) => {
         const linkUrl = "/" + String(item.id);
         const letDelChat = () => {
-    dispatch(delChat(index))
+        dispatch(delChat(index))
   }
-          return (
-            <><ListItemLink button key={item.id}>
-            <Link className={item.active} to={linkUrl}>{item.name}</Link>
-            <button className="btn-del" onClick={letDelChat}>X</button> 
+    return (
+      <>
+        <ListItemLink button key={item.id}>
+          <Link className={item.active} to={linkUrl}>{item.name}</Link>
+          <button className="btn-del" onClick={letDelChat}>X</button> 
         </ListItemLink>
-        
-        </>
+      </>
         )
       })}
- </>
+  </>
   );
 }
 

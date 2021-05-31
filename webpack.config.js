@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { worker } = require("cluster");
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
@@ -14,9 +15,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 8000,
-    historyApiFallback: {
-      index: 'index.html'
-  }
+    historyApiFallback: true
 
   },
   module: {

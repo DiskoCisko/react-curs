@@ -6,7 +6,7 @@ import Bot from './bot'
 
 import AUTHORS from './authors';
 
- class App extends React.Component {
+class App extends React.Component {
     componentDidMount() {
         this.props.updateIdChat(this.props.match.params.id)
     }

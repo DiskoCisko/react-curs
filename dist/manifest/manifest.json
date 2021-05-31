@@ -1,0 +1,18 @@
+{
+    "short_name": "Chat-bot",
+    "name": "Chat-bot for resume",
+    "icons": [
+        {
+      "src":"/manifest/chat.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+    "start_url": "/",
+    "background_color": "#B5CADD",
+    "theme_color": "#B5CADD",
+    "orientation": "any",
+    "gcm_sender_id": "1234567890",
+    "display": "standalone"
+   }
+   

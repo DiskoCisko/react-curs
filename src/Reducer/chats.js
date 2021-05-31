@@ -1,9 +1,6 @@
 import {ADD_CHAT, UP_CHAT, DEL_CHAT} from './../actions/actionTypes';
 import CHAT_LIST from './../components/chats_store';
 
-
-const initialState = CHAT_LIST;
-
 export default function ( state = CHAT_LIST, action) {
     switch (action.type) {
         case ADD_CHAT: {

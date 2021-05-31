@@ -135,6 +135,79 @@ a {
     outline: none;
     cursor: pointer;
 }
+.art {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.art h3 {
+    margin-top: 40px;
+}
+.speech-bubble-container {
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
+    z-index: 1000;
+    text-align: center;
+    color: #0773b1;
+   }
+   
+   .speech-bubble {
+    padding: 0 10px;
+    min-height: 58px;
+    position: relative;
+    background: #b7dcf1;
+    padding-top: 20px;
+   }
+   
+   .speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #b7dcf1;
+    border-bottom: 0;
+    margin-left: -20px;
+    margin-bottom: -20px;
+   }
+   
+   .close-install-message-icon {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    border: 1px solid #eb3d5a;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    background: rgb(255, 204, 221);
+    color: #eb3d5a !important;
+   }
+   
+   .push {
+       margin-left: 20px;
+   }
+
+   .push__image {
+       color: #fff;
+       background-color: transparent;
+       border: none;
+       outline: none;
+       cursor: pointer;
+       font-size: 14px;
+       text-transform: uppercase;
+       font-weight: 400;
+   }
+
+
+@media (max-width: 700px) {
+    .messege, .bot{
+        width: 80%;
+    }
+}
+
+
 @keyframes show{
     0%{
     opacity:0;

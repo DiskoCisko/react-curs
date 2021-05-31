@@ -1,7 +1,6 @@
 import {ADD_MES, UP_MES, } from './../actions/actionTypes';
 import CHAT_LIST from './../components/chats_store';
 
-
 const newState = CHAT_LIST.reduce((accumulator, currentValue) => {
     return {
         ...accumulator,
@@ -24,7 +23,6 @@ export default function (st = initialState, action) {
                 [content.id]: []
             }
         }
-       
         default:
             return st;
     }

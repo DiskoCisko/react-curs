@@ -12,13 +12,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-
-
 export default function SimpleList(props) {
   const classes = useStyles();
   return ( <> 
     {props.menuShow && <div className={classes.root}>
-    
       <Divider />
       <List component="nav" aria-label="secondary mailbox folders">
        <ChatList chatList={props.chatList}/>

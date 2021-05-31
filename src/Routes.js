@@ -14,20 +14,14 @@ import {addChat} from './actions/actions';
 import {addMesWithThunk} from './actions/actions';
 import {upMes} from './actions/actions';
 
-import CHAT_LIST from './components/chats_store';
 import ChatList from './components/ChatList';
-
+import InstallPopup from './components/installPopup';
 import App from './components/child';
 import Header from './components/Header';
 import LeftMenu from './components/LeftMenu';
 
 import Art from './components/Art';
 import AUTHORS from './components/authors';
-
-let objStr;
-      for (let i = 0; i < CHAT_LIST.length; i++) {
-          objStr = {...objStr,[CHAT_LIST[i].id]: []}
-        }
 
 const Routes = ({chats, messeges, addMesWithThunk, upMes, addChat}) => {
   const dispatch = useDispatch();
@@ -38,6 +32,7 @@ const Routes = ({chats, messeges, addMesWithThunk, upMes, addChat}) => {
     if(!messeges.hasOwnProperty(chats[chats.length - 1].id)) {
       upMes(chats[chats.length - 1].id)
     }
+    console.log(idChat)
   }, [chats]);
 
   useEffect(() => {
@@ -67,13 +62,17 @@ const Routes = ({chats, messeges, addMesWithThunk, upMes, addChat}) => {
     />
       <Switch>
         <Route path="/" exact>
-          <ChatList menuShow={menuShow}
-                    />
+          <ChatList menuShow={menuShow}/>
+          <InstallPopup />
         </Route>
         <Route path="/Art" exact>
           <Art/>
         </Route>
         <Route path="/:id" exact>
+        <Route >
+        <ChatList menuShow={menuShow}
+                    />
+        </Route>
       <App 
       
       updateIdChat = {updateIdChat}

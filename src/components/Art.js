@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from 'react-redux';
-import {getArticle} from './../actions/actions';
+import React from "react";
+import {useSelector} from 'react-redux';
 import {RESP_STATUS} from './../utils/constance';
 
 const Art = () => {
@@ -19,10 +18,10 @@ if(articleStatus === RESP_STATUS.PENDING) {
 if(articleError) {
     return <h2>{articleError}</h2>
 }
-    return <>
+    return <div className="art">
         <h1>Yoooy</h1>
         {catFact}
-    </>
+    </div>
 }
 
 export default Art;
